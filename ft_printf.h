@@ -15,7 +15,7 @@
 # define FT_PRINTF_H
 # include "libft/libft.h"
 
-typedef struct s_print
+typedef struct s_gen
 {
 	t_conv		conv;
 	t_flag		flag;
