@@ -11,50 +11,83 @@
 /* ************************************************************************** */
 
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/libft.h"
+#ifndef FT_PRINTF_H_
+# define FT_PRINTF_H_
 
-typedef struct s_gen
-{
-	t_conv		conv;
-	t_flag		flag;
-	int			perc = 0;
-	int			width = 0;
-	int			prec = 0;	
-}				t_gen;
-
-typedef struct 	s_conv
-{
-	int		s = 0;
-	int		S = 0;
-	int		p = 0;
-	int		d = 0;
-	int		D = 0;
-	int		i = 0;
-	int		o = 0;
-	int		O = 0;
-	int		u = 0;
-	int		U = 0;
-	int		x = 0;
-	int		X = 0;
-	int		c = 0;
-	int		C = 0;
-}				t_conv;
+# include "./libft/libft.h"
+# include <stdarg.h>
+# include <wchar.h>
+# include <locale.h>
+# include <inttypes.h>
+# define ALL_SYMB ".#0-+ hljz0123456789"
+# define MOD  "hljz"
+# define TYPE "sSpdDioOuUxXcC"
+# define FLAGS "#0-+ "
+# define X_CONVERSION "0123456789abcdef"
+# define BIG_X_CONVERSION "0123456789ABCDEF"
 
 typedef struct 	s_flag
 {
-	int			hash = 0;
-	int			zero = 0;
-	int			minu = 0;
-	int			plus = 0;
-	int			spac = 0;
-	int			hh = 0;
-	int			h = 0;
-	int			l = 0;
-	int			ll = 0;
-	int			j = 0;
-	int			z = 0;
+	int hash; //0
+	int zero; //1
+	int minus;//2
+	int plus; //3
+	int space;//4
 }				t_flag;
+
+/*
+** variable type of arg
+ */
+typedef struct	s_mod
+{
+	int			hh;
+	int			h;
+	int			l;
+	int			ll;
+	int			j;
+	int			z;
+}				t_mod;
+
+typedef struct s_gen
+{
+    t_flag		flag;
+    t_mod       mod;
+    int			width;
+    int			prec;
+    char        type;
+    int         byte;
+}				t_gen;
+
+typedef int (*t_func)(t_gen *gen_struct, va_list args);
+
+typedef struct  s_func_arr
+{
+    char    ident;
+    t_func  func;
+}               t_func_arr;
+
+int		ft_printf(const char *format, ...);
+int 	ft_parser(const char *format, va_list *args, int *i);
+void    init_struct(t_gen *gen_struct);
+
+int     conv_to_hex(t_gen *gen_struct, va_list args);
+int     conv_to_octal(t_gen *gen_struct, va_list args);
+int     conv_to_str(t_gen *gen_struct, va_list args);
+int     conv_to_unistr(t_gen *gen_struct, va_list args);
+int     conv_to_ptr(t_gen *gen_struct, va_list args);
+int     conv_to_decimal(t_gen *gen_struct, va_list args);
+int     conv_to_unsigned(t_gen *gen_struct,  va_list args);
+int     conv_to_char(t_gen *gen_struct,  va_list args);
+int     conv_to_unichar(t_gen *gen_struct, va_list args);
+int     no_type(t_gen *gen_struct);
+
+int     set_flags(t_gen *gen_struct, const char *format);
+int     set_width(t_gen *gen_struct, const char *format);
+void    set_precision(t_gen *gen_struct, const char *format);
+void    set_precision_helper(t_gen *gen_struct, const char *format, int *i);
+int     set_mod(t_gen *gen_struct, const char *format, int *mod_counter);
+void    set_mod_helper(t_gen *gen_struct, const char *format, int *mod_counter);
+int     set_type(t_gen *gen_struct, const char *format, va_list *args);
+char    *ft_itoa_base(int num, int base);
 
 #endif

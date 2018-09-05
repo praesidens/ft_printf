@@ -83,7 +83,7 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_reverse(char *a);
-int					ft_int_len(int n);
+size_t				ft_num_len(intmax_t n, int base);
 int					ft_add_one(int n);
 int					ft_add_two(int n);
 int					ft_add_three(int n);

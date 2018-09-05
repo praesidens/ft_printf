@@ -10,15 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_int_len(int n)
+#include "libft.h"
+
+size_t		ft_num_len(intmax_t n, int base)
 {
-	int	i;
+	size_t	i;
 
 	i = 1;
-	while (n != 0)
-	{
-		n = n / 10;
+	while ((n /= base))
 		i++;
-	}
 	return (i);
 }
