@@ -8,15 +8,12 @@ int     main(void)
     cecimal_num = 12333;
     decimal_num = 4536;
 
-    int     octal_num;
-
-    octal_num = 12312;
-
-    ft_printf("%lo", octal_num);
-    //ft_printf("%ld%ld", cecimal_num, decimal_num);
-    ft_printf("%00lo", octal_num);
-    //printf("PRINTF:%zo\n", octal_num);
-    ft_printf("%zd%zd", cecimal_num, decimal_num);
-    //printf("PRINTF:%zi\nPRINTF:%zi\n", cecimal_num, (long)decimal_num);
+    ft_printf("FT_PRINTF %ld\n", decimal_num);
+    printf("RET VAL: %d\n", ft_printf("FT_PRINTF %ld\n", decimal_num));
+    printf("%d\n", decimal_num);
+    ft_printf("FT_PRINTF %d\n", decimal_num);
+    printf("%d\n", decimal_num);
+    ft_printf("FT_PRINTF %i\n", cecimal_num);
+    printf("%i\n", cecimal_num);
     return (0);
 }

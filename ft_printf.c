@@ -7,9 +7,9 @@ int		ft_printf(const char *format, ...)
     int         i;
 
     res = 0;
-    i = 0;
+    i = -1;
     va_start(args, format);
-    while (format[i++])
+    while (format[++i])
     {
         if (format[i] == '%' && !(ft_strequ(format, "% ")))
             res += ft_parser((format + (i += 1)), &args, &i);
@@ -35,6 +35,7 @@ int    ft_parser(const char *format, va_list *args, int *i)
 
     mod_counter = 0;
     j = 0;
+    init_struct(&gen);
 	while (format[j])
     {
         while (ft_strchr(FLAGS, format[j]))
@@ -58,13 +59,15 @@ int     set_type(t_gen *gen_struct, const char *format, va_list *args)
 {
     int     i;
     int     c;
+    /*
     const t_func_arr funcs[] = {{'s', &conv_to_str}, {'S', &conv_to_unistr},
                         {'p', &conv_to_ptr}, {'d', &conv_to_decimal},
                         {'D', &conv_to_decimal}, {'i', &conv_to_decimal},
                         {'o', &conv_to_octal}, {'O', &conv_to_octal},
                         {'u', &conv_to_unsigned}, {'U', &conv_to_unsigned},
                         {'x', &conv_to_hex}, {'X', &conv_to_hex},
-                        {'c', &conv_to_char}, {'C', &conv_to_unichar}, {0, NULL}};
+                        {'c', &conv_to_char}, {'C', &conv_to_unichar}, {0, NULL}};*/
+    const t_func_arr funcs[] = {{'d', &conv_to_decimal}, {'i', &conv_to_decimal}};
     i = 0;
     c = -1;
     if (ft_strchr(TYPE, format[i]))
@@ -72,7 +75,7 @@ int     set_type(t_gen *gen_struct, const char *format, va_list *args)
         gen_struct->type = format[i];
         while (funcs[++c].ident != gen_struct->type)
             ;
-        return (funcs[c].func(*args, gen_struct));
+        return (funcs[c].func(gen_struct, *args));
     }
     else
     {

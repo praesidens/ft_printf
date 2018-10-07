@@ -13,9 +13,9 @@ void    init_struct(t_gen *gen_struct)
     gen_struct->mod.ll = 0;
     gen_struct->mod.j = 0;
     gen_struct->mod.z = 0;
-    gen_struct->width = 0;
+    gen_struct->width = -1;
     gen_struct->prec = -1;
-    gen_struct->type = '\0';
+    gen_struct->type = 'u';
 //    ft_bzero(gen_struct->last_mod, 3);
 }
 

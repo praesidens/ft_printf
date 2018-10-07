@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/bsuprun/Pro/ft_printf/./libft/libft.h
+string.h
+-
+stdlib.h
+-
+unistd.h
+-
+
+/Users/bsuprun/Pro/ft_printf/conv_to_decimal.c
+ft_printf.h
+/Users/bsuprun/Pro/ft_printf/ft_printf.h
+
+/Users/bsuprun/Pro/ft_printf/ft_itoa_base.c
+ft_printf.h
+/Users/bsuprun/Pro/ft_printf/ft_printf.h
+
+/Users/bsuprun/Pro/ft_printf/ft_print_char.c
+ft_printf.h
+/Users/bsuprun/Pro/ft_printf/ft_printf.h
+
+/Users/bsuprun/Pro/ft_printf/ft_printf.h
+./libft/libft.h
+/Users/bsuprun/Pro/ft_printf/./libft/libft.h
+stdarg.h
+-
+wchar.h
+-
+locale.h
+-
+inttypes.h
+-
+

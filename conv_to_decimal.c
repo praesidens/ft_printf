@@ -1,31 +1,76 @@
 #include "ft_printf.h"
+/*
+** G gen_struct (main structure in the whole programme)
+** F flag (flag is a struct, which is used inside
+** of the main struct in order to mark flags "#0-+ "
+** W width
+** P plus
+** S space
+*/
 
 int     conv_to_decimal(t_gen *gen_struct, va_list args)
 {
-    intmax_t dec;
+	size_t      len;
+	long long   num;
+    char        *res;
+    int         cnt;
 
-    size_t int_len;
-
-    if (gen_struct->type != '\0' && gen_struct->mod.z)
-        dec = (ssize_t)va_arg(args, intmax_t);
-    else if (gen_struct->type != '\0' && gen_struct->mod.j)
-        dec = va_arg(args, intmax_t);
-    else if (gen_struct->type != '\0' && gen_struct->mod.ll)
-        dec = (long long)va_arg(args, intmax_t);
-    else if (gen_struct->type != '\0' && gen_struct->mod.l)
-        dec = (long)va_arg(args, intmax_t);
-    else if (gen_struct->type != '\0' && gen_struct->mod.h)
-        dec = (short)va_arg(args, intmax_t);
-    else if (gen_struct->type != '\0' && gen_struct->mod.hh)
-        dec = (signed char)va_arg(args, intmax_t);
+    cnt = 0;
+    res = NULL;
+    num = fetch_num(G, args);
+    if (G->prec == -1 && G->F.zero && !G->F.minus)
+    {
+        if (G->F.S || num < 0 || G->F.P)
+            res = itoa_printf(num, (size_t)G->W - 1, (char)(G->F.P ? '+' : G->F.S));
+        else
+            res = itoa_printf(num, (size_t)G->W, (char)(G->F.P ? '+' : G->F.S));
+    }
     else
-        dec = (int)va_arg(args, int);
-    //printf("INT LEN = %d\n", ft_int_len(dec));
-    //printf("PRINTF %d\n", (int)dec);
-    (void)*(*format)++;
-    int_len = ft_num_len(dec, 10);
-    //printf("INTLEN = %zu\n", int_len);
-    write(1, ft_itoa((int)dec), int_len);
-    write(1, "\n", 1);
-    return ((int)int_len);
+        res = itoa_printf(num, (size_t)G->prec, (char)(G->F.P ? '+' : G->F.S));
+    if (!G->prec && !num)
+        res[ft_strlen(res) - 1] = G->W > 0 ? ' ' : 0;
+    len = ft_strlen(res);
+    G->F.minus != 0 ? write(1, res, len) : ft_print_ch(' ', G->W - (int)len, &cnt);
+    G->F.minus == 0 ? write(1, res, len) : ft_print_ch(' ', G->W - (int)len, &cnt);
+    free(res);
+    return ((int)len + cnt);
+}
+
+char    *itoa_printf(long long int num, int len, char c)
+{
+    int     i;
+    char    *res;
+
+    i = ft_num_len(num, 10);
+    len = (len < i) ? i : len;
+    if (num < 0)
+        return (neg_itoa_printf(-num, len));
+    if (!(res = (char*)malloc(sizeof(char) * (len += (c > 0 ? 1 : 0)) + 1)))
+        return (NULL);
+    res[len] = 0;
+    while (len != 0)
+    {
+        res[--len] = (num % 10) + '0';
+        num /= 10;
+    }
+    if (c)
+        res[0] = c;
+    return (res);
+}
+
+char    *neg_itoa_printf(long long int num, int len)
+{
+    char    *res;
+
+    len = len < ft_num_len(num, 10) ? ft_num_len(num, 10) : len;
+    if (!(res = (char*)malloc(sizeof(char) * ((len += 1) + 1))))
+        return (NULL);
+    res[len] = 0;
+    while (len)
+    {
+        res[--len] = (num % 10) + '0';
+        num /= 10;
+    }
+    res[0] = '-';
+    return (res);
 }

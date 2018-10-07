@@ -25,14 +25,19 @@
 # define FLAGS "#0-+ "
 # define X_CONVERSION "0123456789abcdef"
 # define BIG_X_CONVERSION "0123456789ABCDEF"
+# define G gen_struct
+# define F flag
+# define W width
+# define P plus
+# define S space
 
 typedef struct 	s_flag
 {
 	int hash; //0
 	int zero; //1
 	int minus;//2
-	int plus; //3
-	int space;//4
+	int plus; //4
+	int space;//3
 }				t_flag;
 
 /*
@@ -88,6 +93,12 @@ void    set_precision_helper(t_gen *gen_struct, const char *format, int *i);
 int     set_mod(t_gen *gen_struct, const char *format, int *mod_counter);
 void    set_mod_helper(t_gen *gen_struct, const char *format, int *mod_counter);
 int     set_type(t_gen *gen_struct, const char *format, va_list *args);
+long long   fetch_num(t_gen *gen_struct, va_list args);
+unsigned long long fetch_unsigned_num(t_gen *gen_struct, va_list args);
 char    *ft_itoa_base(int num, int base);
+char    *itoa_printf(long long int num, int len, char c);
+char    *neg_itoa_printf(long long int num, int len);
+void    ft_print_ch(char c, int len, int *counter);
+char    *ft_strzero(int len);
 
 #endif

@@ -16,7 +16,6 @@ int    set_mod(t_gen *gen_struct, const char *format, int *mod_counter)
         gen_struct->mod.z = *format == 'z' ? 1 : 0;
         gen_struct->mod.j = *format == 'j' ? 1 : 0;
         i++;
-        //*mod_counter += 1;
     }
     format--;
     set_mod_helper(gen_struct, format, mod_counter);

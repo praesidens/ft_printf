@@ -1,9 +1,21 @@
 #include "ft_printf.h"
 
-int     conv_to_octal(t_gen *gen_struct, const char **format, va_list args)
+int     conv_to_octal(t_gen *gen_struct, va_list args)
 {
-    size_t      oct;
-    size_t      oct_len;
+	unsigned long long	num;
+	int 				len;
+	int 				ctr;
+	char 				*str;
+
+	ctr = 0;
+	str = NULL;
+	num = fetch_unsigned_num(gen_struct, args);
+	if (G->prec == -1 && G->F.zero && !G->F.minus)
+	{
+		if (G->F.hash)
+			str = ft_itoa_oct(gen_struct, )
+	}
+
 
     if (gen_struct->type != '\0' && gen_struct->mod.z)
         oct = va_arg(args, size_t);

@@ -87,5 +87,6 @@ size_t				ft_num_len(intmax_t n, int base);
 int					ft_add_one(int n);
 int					ft_add_two(int n);
 int					ft_add_three(int n);
+char                *ft_strljoin(char **s1, char **s2);
 
 #endif
