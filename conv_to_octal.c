@@ -1,5 +1,24 @@
 #include "ft_printf.h"
 
+char 	*ft_itoa_oct(t_gen *gen_struct, int len, int ch, unsigned long long num)
+{
+	int 	j;
+	int 	*r;
+
+	j = 0;
+	while (num /= 8)
+		j++;
+	if (!G->F.hash)
+		ch = 0;
+	else if (num == 0 && G->prec != 0)
+		ch = 0;
+	len = j > len ? j : len;
+	if (!(r = (char*)malloc((len += (ch == '#' ? 1 : 0)) +1)))
+		return (NULL);
+
+
+}
+
 int     conv_to_octal(t_gen *gen_struct, va_list args)
 {
 	unsigned long long	num;
@@ -13,25 +32,9 @@ int     conv_to_octal(t_gen *gen_struct, va_list args)
 	if (G->prec == -1 && G->F.zero && !G->F.minus)
 	{
 		if (G->F.hash)
-			str = ft_itoa_oct(gen_struct, )
+			str = ft_itoa_oct(gen_struct, G->prec - 1, G->F.hash ? '#' : 0, num);
 	}
 
-
-    if (gen_struct->type != '\0' && gen_struct->mod.z)
-        oct = va_arg(args, size_t);
-    else if (gen_struct->type != '\0' && gen_struct->mod.j)
-        oct = (uintmax_t)va_arg(args, uintmax_t);
-    else if (gen_struct->type != '\0' && gen_struct->mod.ll)
-        oct = (unsigned long long)va_arg(args, unsigned long long);
-    else if (gen_struct->type != '\0' && gen_struct->mod.l)
-        oct = (unsigned long)va_arg(args, unsigned long);
-    else if (gen_struct->type != '\0' && gen_struct->mod.h)
-        oct = (unsigned short)va_arg(args, unsigned short);
-    else if (gen_struct->type != '\0' && gen_struct->mod.hh)
-        oct = (unsigned char)va_arg(args, unsigned char);
-    else
-        oct = (unsigned int)va_arg(args, unsigned int);
-    (void)*(*format)++;
     oct_len = ft_num_len(oct, 8);
     //printf("OCT_LEN = %zu\n", oct_len);
     write(1, ft_itoa_base((int)oct, 8), oct_len);
