@@ -55,10 +55,10 @@ int     conv_to_octal(t_gen *gen_struct, va_list args)
 			str = ft_itoa_oct(gen_struct, G->prec - 1, G->F.hash ? '#' : 0, num);
 	}
 
-    oct_len = ft_num_len(oct, 8);
-    //printf("OCT_LEN = %zu\n", oct_len);
-    write(1, ft_itoa_base((int)oct, 8), oct_len);
-    write(1, "\n", 1);
-    init_struct(gen_struct);
-    return ((int)oct_len);
+	oct_len = ft_num_len(oct, 8);
+	//printf("OCT_LEN = %zu\n", oct_len);
+	write(1, ft_itoa_base((int)oct, 8), oct_len);
+	write(1, "\n", 1);
+	init_struct(gen_struct);
+	return ((int)oct_len);
 }

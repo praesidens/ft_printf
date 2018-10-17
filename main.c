@@ -22,7 +22,7 @@ int     main(void)
 
     ft_printf("FT_PRINTF %ld\n", decimal_num);
     printf("RET VAL: %d\n", ft_printf("FT_PRINTF %ld\n", decimal_num));
-    printf("%d\n", decimal_num);
+    printf("%d\n", adecimal_num);
     ft_printf("FT_PRINTF %d\n", decimal_num);
     printf("%d\n", decimal_num);
     ft_printf("FT_PRINTF %i\n", cecimal_num);

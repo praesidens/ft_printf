@@ -55,20 +55,20 @@ typedef struct	s_mod
 
 typedef struct s_gen
 {
-    t_flag		flag;
-    t_mod       mod;
-    int			width;
-    int			prec;
-    char        type;
-    int         byte;
+	t_flag		flag;
+	t_mod       mod;
+	int			width;
+	int			prec;
+	char        type;
+	int         byte;
 }				t_gen;
 
 typedef int (*t_func)(t_gen *gen_struct, va_list args);
 
 typedef struct  s_func_arr
 {
-    char    ident;
-    t_func  func;
+	char    ident;
+	t_func  func;
 }               t_func_arr;
 
 int		ft_printf(const char *format, ...);
