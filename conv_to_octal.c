@@ -1,4 +1,12 @@
 #include "ft_printf.h"
+/*
+** G gen_struct (main structure in the whole programme)
+** F flag (flag is a struct, which is used inside
+** of the main struct in order to mark flags "#0-+ "
+** W width
+** P plus
+** S space
+*/
 
 char 	*ft_itoa_oct(t_gen *gen_struct, int len, int ch, unsigned long long num)
 {
@@ -13,7 +21,7 @@ char 	*ft_itoa_oct(t_gen *gen_struct, int len, int ch, unsigned long long num)
 	else if (num == 0 && G->prec != 0)
 		ch = 0;
 	len = j > len ? j : len;
-	if (!(r = (char*)malloc((len += (ch == '#' ? 1 : 0)) +1)))
+	if (!(r = (char*)malloc((len += (ch == '#' ? 1 : 0)) + 1)))
 		return (NULL);
 
 
