@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-int    set_width(t_gen *gen_struct, const char *format)
+int		set_width(t_gen *gen_struct, const char *format)
 {
-	int     counter;
+	int		counter;
 
 	counter = 0;
 	if (ft_isdigit(*format))
